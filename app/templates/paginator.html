@@ -1,0 +1,83 @@
+<div class="col-sm-6">
+    <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+        <ul class="pagination" style="margin-top: 0; float: right">
+            {% if contacts.has_prev %}
+                <li class="paginate_button previous" aria-controls="editable" tabindex="0" id="editable_previous">
+                    <a class="page" href="?page={{ contacts.prev_num }}">Previous</a>
+                </li>
+            {% else %}
+                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+                     <a class="page" href="">Previous</a>
+                </li>
+            {% endif %}
+            {% if contacts.pages ==1 %}
+            <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page=1"  title="第1页">1</a></li>
+            {% else %}
+
+            {% if contacts.pages <= 5 %}
+                {% for p in range(1, contacts.pages+1) %}
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ p }}"  title="第{{ p }}页">{{ p }}</a></li>
+                {% endfor %}
+            {% elif contacts.page <= 3 %}
+                {% for p in range(1, contacts.page+1) %}
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ p }}"  title="第{{ p }}页">{{ p }}</a></li>
+                {% endfor %}
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ contacts.next_num }}"  title="第{{ contacts.next_num }}页">{{ contacts.next_num }}</a></li>
+            {% elif contacts.pages == page %}
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page=1"  title="第1页">1..</a></li>
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ contacts.prev_num }}"  title="第{{ contacts.prev_num }}页">{{ contacts.prev_num }}</a></li>
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ page }}"  title="第{{ page }}页">{{ page }}</a></li>
+            {% else %}
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page=1"  title="第1页">1..</a></li>
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ contacts.prev_num }}"  title="第{{ contacts.prev_num }}页">{{ contacts.prev_num }}</a></li>
+                <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ contacts.page }}"  title="第{{ contacts.page }}页">{{ contacts.page }}</a></li>
+                {% if contacts.next_num+1 <= contacts.pages %}
+                    <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ contacts.next_num }}"  title="第{{ contacts.next_num }}页">{{ contacts.next_num }}</a></li>
+                    <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ contacts.pages }}"  title="第{{ contacts.pages }}页">...{{ contacts.pages }}</a></li>
+                {% else %}
+                    <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page={{ contacts.pages }}"  title="第{{ contacts.pages }}页">{{ contacts.pages }}</a></li>
+                {% endif %}
+            {% endif %}
+            {% endif %}
+
+            {% if contacts.has_next %}
+                <li class="paginate_button next" aria-controls="editable" tabindex="0" id="editable_next">
+                    <a class="page" href="?page={{ contacts.next_num }}">Next</a>
+                </li>
+            {% else %}
+                <li class="paginate_button next disabled" aria-controls="editable" tabindex="0" id="editable_next">
+                    <a class="page" href="">Next</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<script>
+    function sleep(n) { //n表示的毫秒数
+            var start = new Date().getTime();
+            while (true) if (new Date().getTime() - start > n) break;
+        }
+
+    $(document).ready(function(){
+        $('.page').click(function(){
+            var searchStr = location.search;
+            var old_href = $(this).attr('href').replace('?', '');
+            var searchArray = searchStr.split('&');
+
+            if (searchStr == ''){
+                searchStr = '?page=1'
+            }
+
+            if (searchStr.indexOf('page')>=0){
+                searchArray.pop();
+            }
+
+            searchArray.push(old_href);
+            if (searchArray.length > 1) {
+                $(this).attr('href', searchArray.join('&'));
+            }
+{#            sleep(1000)#}
+        })
+    });
+
+</script>

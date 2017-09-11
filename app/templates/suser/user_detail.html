@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'nav_cat_bar.html' %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary"><b>{{ user_info.username }}</b></span>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#"></a>
+                                </li>
+                                <li><a href="#"></a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div>
+                            <div class="text-left">
+                                <table class="table">
+                                    <tr>
+                                        <td class="text-navy">ID</td>
+                                        <td>{{ user_info.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">用户名</td>
+                                        <td>{{ user_info.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">姓名</td>
+                                        <td>{{ user_info.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">角色</td>
+                                        <td>{{ user_info.role.name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">key</td>
+                                        <td><span style="color: #586b7d">NoKey</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">Email</td>
+                                        <td>{{ user_info.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">激活</td>
+                                        <td>{{ user_info.is_active }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">添加日期</td>
+                                        <td>{{ user_info.create_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">最后登录</td>
+                                        <td>{{ user_info.last_login }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">所在用户组</td>
+                                        <td><a href="#">{{ user_info.usergroup.name }}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">授权主机数量</td>
+                                        <td>
+                                            ###########
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-navy">授权主机组</td>
+                                        <td>
+                                             #######
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>授权主机/组</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content ibox-heading">
+                        <h3>用户的所有授权主机</h3>
+                        <small><i class="fa fa-map-marker"></i> 这里包含了用户授权的主机和其映射的系统用户.</small>
+                    </div>
+                    <div class="ibox-content inspinia-timeline">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>登录记录</h5>
+                            <div class="ibox-tools">
+                                <span class="label label-warning-light">最近登录</span>
+                               </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div id="last">
+
+                                <div class="feed-activity-list" >
+                                        <div class="feed-element">
+                                            <a href="profile.html" class="pull-left">
+                                                <img alt="image" class="img-circle" src="{{ url_for('static', filename='img/root.png') }}">
+                                            </a>
+                                            <div class="media-body ">
+{#                                                <small class="pull-right">#</small>#}
+                                                <small class="pull-right">#</small>
+                                                <strong>#</strong> 登录了 <span class="text-navy">#. </span><br>
+                                                <small class="text-muted">#</small>
+                                            </div>
+                                        </div>
+                                </div>
+                                <button id="show" class="btn btn-primary btn-block m-t"><i class="fa fa-arrow-down"></i> Show More</button>
+                            </div>
+
+                            <div id="all" style="display: none">
+                                <div class="feed-activity-list" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<script>
+    $(document).ready(function(){
+        $('#show').click(function(){
+            $('#last').css('display', 'none');
+            $('#all').css('display', 'block');
+        })
+    })
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,122 @@
+{% if current_user.role_id==3 or current_user.role_id==2 %}
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            {% include 'nav_li_profile.html' %}
+            <li class="treeview {% if request.blueprint=='main' %} active {% endif %}">
+               <a href="{{ url_for('main.index') }}"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard </span><span class="label label-info pull-right"></span></a>
+            </li>
+            <li class="treeview {% if request.blueprint=='users' %} active {% endif %}">
+                <a href="#"><i class="fa fa-group"></i> <span class="nav-label">User Management</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="user"><a href="{{ url_for('users.list') }}"><i class="fa fa-circle-o"></i>View User<span class="label label-primary pull-right"></span></a></li>
+                    <li class="group"><a href="{{ url_for('users.grouplist') }}"><i class="fa fa-circle-o"></i>View Groups</a></li>
+                    <li class="sectiones"><a href="{{ url_for('users.sectionlist') }}"><i class="fa fa-circle-o"></i>View Sections</a></li>
+                    <li class="teams"><a href="{{ url_for('users.teamslist') }}"><i class="fa fa-circle-o"></i>View Teams</a></li>
+                </ul>
+            </li>
+            <li class="treeview {% if request.blueprint=='asset' %} active {% endif %}">
+                <a href="#"><i class="fa fa-server"></i> <span class="nav-label">Asset Management</span><span class="fa arrow"></span></a>
+                <ul class=" nav nav-second-level">
+                    <li class="idc"> <a href="#"><i class="fa fa-circle-o"></i>View IDC</a></li>
+                    <li class="asset"> <a href="#"><i class="fa fa-circle-o"></i>View Asset<span class="label label-info pull-right">{{ host_active_num }}/{{ host_total_num}}</span></a></li>
+                    <li class="group"><a href="#"><i class="fa fa-circle-o"></i>View Asset Groups</a></li>
+                </ul>
+            </li>
+            <li class="treeview {% if request.blueprint=='dns' %} active {% endif %}">
+                <a href="#"><i class="fa  fa-send"></i> <span class="nav-label">DNS</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="download"><a href="{{ url_for('dns.zone_add') }}"><i class="fa fa-circle-o"></i>域名列表</a></li>
+                    <li class="upload"><a href="{{ url_for('dns.dns_list')}}"><i class="fa fa-circle-o"></i>主机名列表</a></li>
+                </ul>
+            </li>
+            <li class="treeview {% if request.blueprint=='author' %} active {% endif %}">
+                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Authorization</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="sudo">
+                        <a class="sudo" href="#">Sudo</a>
+                    </li>
+                    <li class="role">
+                        <a href="#">System User</a>
+                    </li>
+                    <li class="rule">
+                        <a href="#">Authorization Rules</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-creative-commons"></i> <span class="nav-label">Cobbler</span><span class="fa arrow"></span></a>
+                <ul class="treeview-menu nav nav-second-level">
+                    <li class="upload"><a href="#">File Uploads</a></li>
+                    <li class="download"><a href="#">File Downloads</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">SaltStack</span><span class="fa arrow"></span></a>
+                <ul class=" treeview-menu nav nav-second-level">
+                    <li class="upload"><a href="#">File Uploads</a></li>
+                    <li class="download"><a href="#">File Downloads</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-tripadvisor"></i> <span class="nav-label">Github</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="upload"><a href="#">File Uploads</a></li>
+                    <li class="download"><a href="#">File Downloads</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-download"></i> <span class="nav-label">Uploads/Downloads</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="upload"><a href="#">File Uploads</a></li>
+                    <li class="download"><a href="#">File Downloads</a></li>
+                </ul>
+            </li>
+            <li class="treeview {% if request.blueprint=='srpm' %} active {% endif %}">
+               <a href="{{ url_for('srpm.make') }}"><i class="fa fa-rebel"></i> <span class="nav-label">RPMFactory</span><span class="label label-info pull-right"></span></a>
+            </li>
+            <li class="treeview">
+               <a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Log</span><span class="label label-info pull-right"></span></a>
+            </li>
+            <li class="treeview">
+                   <a href="{{ url_for('main.index') }}" target="_blank"><i class="fa fa-wordpress"></i> <span class="nav-label">Website</span><span class="label label-info pull-right"></span></a>
+            </li>
+            <li class="special_link">
+                <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Setting</span></a>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>
+{% endif %}
+{% if current_user.role_id == 1 %}
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            {% include 'nav_li_profile.html' %}
+            <li id="juser">
+               <a href="{{ url_for('users.detail') }}"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard</span><span class="label label-info pull-right"></span></a>
+            </li>
+            <li id="saltstack">
+                <a href="#"><i class="fa fa-cubes"></i> <span class="nav-label">SaltStack</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="upload"><a href="#">File Uploads</a></li>
+                    <li class="download"><a href="#">File Downloads</a></li>
+                </ul>
+            </li>
+            <li id="file">
+                <a href="#"><i class="fa fa-download"></i> <span class="nav-label">Uploads/Downloads</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="upload"><a href="#">File Uploads</a></li>
+                    <li class="download"><a href="#">File Downloads</a></li>
+                </ul>
+            </li>
+
+            <li class="special_link">
+                <a href="#" target="_blank"><i class="fa fa-wordpress"></i> <span class="nav-label">Website</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endif %}
